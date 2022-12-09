@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             Classifier model = Classifier.newInstance(getApplicationContext());
 
-            // Creates inputs for reference.
+
             TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 224, 224, 3}, DataType.FLOAT32);
             ByteBuffer byteBuffer = ByteBuffer.allocateDirect(4 * imgSize * imgSize * 3);
             byteBuffer.order(ByteOrder.nativeOrder());
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             }
             inputFeature0.loadBuffer(byteBuffer);
 
-            // Runs model inference and gets result.
+
             Classifier.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
 
@@ -112,10 +112,9 @@ public class MainActivity extends AppCompatActivity {
             tv.setText(classes[maxPos]);
             conf.setText("예측이 맞을 확률:"+ String.valueOf(Math.floor(maxConfidence * 100))+"%");
 
-            // Releases model resources if no longer used.
             model.close();
         } catch (IOException e) {
-            // TODO Handle the exception
+            //
         }
     }
 
